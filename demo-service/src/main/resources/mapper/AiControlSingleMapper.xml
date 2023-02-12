@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.csits.demo.mapper.AiControlSingleMapper">
+
+    <resultMap id="BaseResultMap" type="org.csits.demo.domain.AiControlSingle">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="create_by" column="create_by" jdbcType="VARCHAR"/>
+            <result property="create_time" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="update_by" column="update_by" jdbcType="VARCHAR"/>
+            <result property="update_time" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="sys_org_code" column="sys_org_code" jdbcType="VARCHAR"/>
+            <result property="price" column="price" jdbcType="DECIMAL"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="mi_ma" column="mi_ma" jdbcType="VARCHAR"/>
+            <result property="xiala" column="xiala" jdbcType="VARCHAR"/>
+            <result property="danxuan" column="danxuan" jdbcType="VARCHAR"/>
+            <result property="duoxuan" column="duoxuan" jdbcType="VARCHAR"/>
+            <result property="kaiguan" column="kaiguan" jdbcType="VARCHAR"/>
+            <result property="riqi" column="riqi" jdbcType="DATE"/>
+            <result property="nyrsfm" column="nyrsfm" jdbcType="TIMESTAMP"/>
+            <result property="shijian" column="shijian" jdbcType="VARCHAR"/>
+            <result property="wenjian" column="wenjian" jdbcType="VARCHAR"/>
+            <result property="tupian" column="tupian" jdbcType="VARCHAR"/>
+            <result property="dhwb" column="dhwb" jdbcType="VARCHAR"/>
+            <result property="xldx" column="xldx" jdbcType="VARCHAR"/>
+            <result property="xlss" column="xlss" jdbcType="VARCHAR"/>
+            <result property="popup" column="popup" jdbcType="VARCHAR"/>
+            <result property="popback" column="popback" jdbcType="VARCHAR"/>
+            <result property="flzds" column="flzds" jdbcType="VARCHAR"/>
+            <result property="bmxz" column="bmxz" jdbcType="VARCHAR"/>
+            <result property="yhxz" column="yhxz" jdbcType="VARCHAR"/>
+            <result property="fwb" column="fwb" jdbcType="VARCHAR"/>
+            <result property="shq" column="shq" jdbcType="VARCHAR"/>
+            <result property="ldzuy" column="ldzuy" jdbcType="VARCHAR"/>
+            <result property="ldzje" column="ldzje" jdbcType="VARCHAR"/>
+            <result property="ldzjs" column="ldzjs" jdbcType="VARCHAR"/>
+            <result property="zdys" column="zdys" jdbcType="VARCHAR"/>
+            <result property="yuanjia" column="yuanjia" jdbcType="DOUBLE"/>
+            <result property="geshu" column="geshu" jdbcType="INTEGER"/>
+            <result property="jycs" column="jycs" jdbcType="VARCHAR"/>
+            <result property="province" column="province" jdbcType="VARCHAR"/>
+            <result property="zdmrz" column="zdmrz" jdbcType="VARCHAR"/>
+            <result property="zdbxl" column="zdbxl" jdbcType="VARCHAR"/>
+            <result property="zdbdx" column="zdbdx" jdbcType="VARCHAR"/>
+            <result property="zdbduoxuan" column="zdbduoxuan" jdbcType="VARCHAR"/>
+            <result property="zdbxldx" column="zdbxldx" jdbcType="VARCHAR"/>
+            <result property="zddtjxl" column="zddtjxl" jdbcType="VARCHAR"/>
+            <result property="zddtjdx" column="zddtjdx" jdbcType="VARCHAR"/>
+            <result property="zddtjduox" column="zddtjduox" jdbcType="VARCHAR"/>
+            <result property="zddtjxldx" column="zddtjxldx" jdbcType="VARCHAR"/>
+            <result property="zddtjxlss" column="zddtjxlss" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,create_by,create_time,
+        update_by,update_time,sys_org_code,
+        price,name,mi_ma,
+        xiala,danxuan,duoxuan,
+        kaiguan,riqi,nyrsfm,
+        shijian,wenjian,tupian,
+        dhwb,xldx,xlss,
+        popup,popback,flzds,
+        bmxz,yhxz,fwb,
+        shq,ldzuy,ldzje,
+        ldzjs,zdys,yuanjia,
+        geshu,jycs,province,
+        zdmrz,zdbxl,zdbdx,
+        zdbduoxuan,zdbxldx,zddtjxl,
+        zddtjdx,zddtjduox,zddtjxldx,
+        zddtjxlss,markdown
+    </sql>
+</mapper>
