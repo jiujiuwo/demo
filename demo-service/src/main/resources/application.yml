@@ -1,45 +1,22 @@
+
 server:
-  port: 8081
+  port: 8080
+  servlet:
+    context-path: /demo
+
+#是否开启定时任务
+quartz:
+  open: true
+
 spring:
-
-  security:
-    user:
-      name: user
-      password: user
-
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: create-drop
+  application:
+    name: demo
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: lihaifeng
     url: jdbc:mysql://127.0.0.1:3306/jeecg-boot?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
-    type: com.alibaba.druid.pool.DruidDataSource
-    #连接池配置
-    druid:
-      #连接池配置
-      initial-size: 2
-      max-active: 30
-      min-idle: 2
-      max-wait: 1234
-      pool-prepared-statements: true
-      max-open-prepared-statements: 5
-      validation-query: select 1
-      validation-query-timeout: 1
-      test-on-borrow: true
-      test-on-return: true
-      test-while-idle: true
-      time-between-eviction-runs-millis: 10000
-      min-evictable-idle-time-millis: 30001
-      async-close-connection-enable: true
-      aop-patterns: org.csits.demo.service.*
-      filters: stat,slf4,wall
-      filter:
-        slf4j:
-          enabled: on
 
   messages:
     basename: i18n/messages
@@ -47,7 +24,27 @@ spring:
     encoding: UTF-8
     fallback-to-system-locale: true
 
+  # 调度框架
+  quartz:
+    auto-startup: ${quartz.open}
+    startup-delay: 1
+    job-store-type: jdbc
+    overwrite-existing-jobs: true
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: DemoScheduler
+          threadPool:
+            threadCount: 5
+    jdbc:
+      initialize-schema: never
+
+
+
 mybatis-plus:
   configuration:
     cache-enabled: true
+
+
 

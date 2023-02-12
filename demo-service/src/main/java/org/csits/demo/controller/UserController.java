@@ -20,11 +20,9 @@ public class UserController implements IUserController {
 
     @Autowired
     private MessageSource messageSource;
-
     @GetMapping("/list")
+    @Override
     public List<SysUser> getUserList() {
         return sysUserService.list();
     }
-
-
 }

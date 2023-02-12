@@ -33,3 +33,6 @@ build/
 .vscode/
 /.mvn/
 /logs/
+/demo-service/logs/
+/demo-service/src/test/
+/demo-api/src/test/
