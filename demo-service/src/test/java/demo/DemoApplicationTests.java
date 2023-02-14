@@ -1,9 +1,15 @@
 package demo;
 
 
+import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.csits.demo.DemoApplication;
+import org.csits.demo.api.qo.SysUserQo;
 import org.csits.demo.domain.SysUser;
 import org.csits.demo.mapper.SysUserMapper;
 import org.csits.demo.service.SysUserService;
@@ -28,10 +34,17 @@ class DemoApplicationTests {
         SysUser sysUser = new SysUser();
         sysUser.setId(UUID.randomUUID().toString().replace("-",""));
         sysUserService.save(sysUser);
-        sysUserService.list().forEach(System.out::println);
-        IPage<SysUser> page = new Page<>();
-        page.setSize(2);
-        page.setCurrent(3);
-        sysUserMapper.selectPageVo(page);
+    }
+
+    @Test
+    void contextLoads2() {
+       SysUser sysUser = new SysUser();
+       Page<SysUser> page = new Page<>();
+        SysUserQo sysUserQo = new SysUserQo();
+        sysUser.setId("803ccd6d830140e59b1a7bed48d6abe8");
+        sysUserQo.setCondition(sysUser);
+        sysUserQo.setPage(page);
+        Page<SysUser> result = sysUserService.selectPageVo(sysUserQo);
+        System.out.println(result.getRecords());
     }
 }

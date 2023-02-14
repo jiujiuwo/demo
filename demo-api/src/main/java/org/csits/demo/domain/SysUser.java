@@ -3,6 +3,7 @@ package org.csits.demo.domain;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -24,6 +25,7 @@ public class SysUser implements Serializable {
     /**
      * 登录账号
      */
+    @NotNull(message = "用户名不能为空")
     @TableField(value = "username")
     private String username;
 

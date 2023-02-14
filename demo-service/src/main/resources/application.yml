@@ -2,15 +2,28 @@
 server:
   port: 8080
   servlet:
-    context-path: /demo
+    context-path: /
 
 #是否开启定时任务
 quartz:
-  open: true
+  open: false
 
 spring:
   application:
     name: demo
+
+  data:
+    redis:
+      host: localhost
+      password:
+      port: 6379
+
+
+  session:
+    timeout: 3000
+    redis:
+      namespace: spring:session
+      flush-mode: on_save
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -40,11 +53,6 @@ spring:
     jdbc:
       initialize-schema: never
 
-
-
 mybatis-plus:
   configuration:
     cache-enabled: true
-
-
-
