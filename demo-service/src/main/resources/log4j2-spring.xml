@@ -14,7 +14,6 @@
                      filePattern="logs/$${date:yyyy-MM}/debug-%d{yyyy-MM-dd}-%i.log.gz">
             <Filters>
                 <ThresholdFilter level="DEBUG"/>
-                <ThresholdFilter level="INFO" onMatch="DENY" onMismatch="NEUTRAL"/>
             </Filters>
             <PatternLayout
                     pattern="[%d{yyyy-MM-dd HH:mm:ss}] %-5level %class{36} %L %M - %msg%xEx%n"/>
@@ -80,7 +79,7 @@
     </appenders>
 
     <loggers>
-        <root level="DEBUG">
+        <root level="INFO">
             <appender-ref ref="Console"/>
             <appender-ref ref="RollingFileInfo"/>
             <appender-ref ref="RollingFileWarn"/>
