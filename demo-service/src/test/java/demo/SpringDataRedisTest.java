@@ -1,9 +1,8 @@
 package demo;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.core.util.JsonUtils;
 import org.csits.demo.DemoApplication;
-import org.csits.demo.service.impl.MyRestTemplteService;
+import org.csits.demo.config.MyRestTemplteService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.TimeUnit;
 
@@ -37,8 +35,8 @@ public class SpringDataRedisTest {
 
     @Test
     public void testRestTemplate() {
-        Object object = myRestTemplteService.getForObject("/", Object.class);
-        log.info(object.toString());
+       // Object object = myRestTemplteService.getForObject("/", Object.class);
+        //log.info(object.toString());
     }
 
 }

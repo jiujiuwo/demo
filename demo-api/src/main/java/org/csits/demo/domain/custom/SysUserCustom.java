@@ -1,4 +1,4 @@
-package org.csits.demo.domain.Custom;
+package org.csits.demo.domain.custom;
 
 import org.csits.demo.domain.SysUser;
 import org.springframework.security.core.GrantedAuthority;

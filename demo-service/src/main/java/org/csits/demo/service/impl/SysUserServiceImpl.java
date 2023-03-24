@@ -14,13 +14,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
-* @author lhf
-* @description 针对表【sys_user(用户表)】的数据库操作Service实现
-* @createDate 2023-02-11 16:06:53
-*/
+ * @author lhf
+ * @description 针对表【sys_user(用户表)】的数据库操作Service实现
+ * @createDate 2023-02-11 16:06:53
+ */
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
-    implements SysUserService{
+        implements SysUserService {
 
     @Autowired
     private SysUserMapper sysUserMapper;
@@ -28,14 +28,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
     @Override
     public Page<SysUser> selectPageVo(SysUserQo sysUserQo) {
         LambdaQueryWrapper<SysUser> queryWrapper = Wrappers.lambdaQuery();
-        queryWrapper.eq(SysUser::getId,sysUserQo.getCondition().getId());
-        return sysUserMapper.selectPage(sysUserQo.getPage(),queryWrapper);
+        queryWrapper.eq(SysUser::getId, sysUserQo.getCondition().getId());
+        return sysUserMapper.selectPage(sysUserQo.getPage(), queryWrapper);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         LambdaQueryWrapper<SysUser> queryWrapper = Wrappers.lambdaQuery();
-        queryWrapper.eq(SysUser::getUsername,username);
+        queryWrapper.eq(SysUser::getUsername, username);
+        SysUser sysUser = sysUserMapper.selectOne(queryWrapper);
         return null;
     }
 }
