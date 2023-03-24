@@ -4,13 +4,14 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.csits.demo.api.qo.SysUserQo;
 import org.csits.demo.domain.SysUser;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  * @author lhf
  * @description 针对表【sys_user(用户表)】的数据库操作Service
  * @createDate 2023-02-11 16:06:53
  */
-public interface SysUserService extends IService<SysUser> {
+public interface SysUserService extends IService<SysUser>, UserDetailsService {
 
     Page<SysUser> selectPageVo(SysUserQo sysUserQo);
 

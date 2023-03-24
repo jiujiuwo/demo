@@ -5,6 +5,7 @@ server:
   tomcat:
     accesslog:
       enabled: true
+      pattern: '%a %b %h %H %m %q %s %t %U %D %X'
       directory: /home/lhf/logs
       prefix: access_log
 
@@ -95,3 +96,10 @@ knife4j:
   setting:
     language: zh_cn
 
+
+#  # 单点登陆CAS配置
+#cas:
+#  server-url-prefix: http://localhost:8088/cas
+#  server-login-url: https://localhost:8088/cas/login
+#  client-host-url: https://localhost:8080
+#  validation-type: CAS3

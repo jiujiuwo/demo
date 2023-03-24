@@ -9,6 +9,8 @@ import org.csits.demo.domain.SysUser;
 import org.csits.demo.mapper.SysUserMapper;
 import org.csits.demo.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -28,6 +30,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
         LambdaQueryWrapper<SysUser> queryWrapper = Wrappers.lambdaQuery();
         queryWrapper.eq(SysUser::getId,sysUserQo.getCondition().getId());
         return sysUserMapper.selectPage(sysUserQo.getPage(),queryWrapper);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        LambdaQueryWrapper<SysUser> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(SysUser::getUsername,username);
+        return null;
     }
 }
 

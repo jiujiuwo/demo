@@ -71,12 +71,12 @@
             <artifactId>spring-boot-starter-quartz</artifactId>
         </dependency>
 
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+ <!--       <dependency>
+            <groupId>org.apereo.cas.client</groupId>
+            <artifactId>cas-client-support-springboot</artifactId>
+            <version>4.0.1</version>
         </dependency>
-
+-->
         <!--测试依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -109,6 +109,10 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <repositories>
+
+    </repositories>
 
 
 </project>
