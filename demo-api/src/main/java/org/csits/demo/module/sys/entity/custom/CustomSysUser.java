@@ -20,7 +20,7 @@ public class CustomSysUser extends SysUser implements UserDetails, Serializable 
 
     @Override
     public boolean isAccountNonLocked() {
-        return super.getDelFlag() == 1;
+        return super.getDelFlag() == 0;
     }
 
     @Override
