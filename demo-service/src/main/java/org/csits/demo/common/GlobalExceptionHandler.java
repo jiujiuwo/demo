@@ -2,9 +2,12 @@ package org.csits.demo.common;
 
 import lombok.extern.slf4j.Slf4j;
 import org.csits.demo.comm.Result;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.redis.connection.PoolException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,10 +15,17 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import java.util.Locale;
+
+import static org.csits.demo.config.ApplicationConfiguration.LOCALE;
+
 @RestController
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+
+    @Autowired
+    private MessageSource messageSource;
 
     @ExceptionHandler(Exception.class)
     public Result<?> handlerException(Exception e) {
@@ -88,5 +98,17 @@ public class GlobalExceptionHandler {
         log.error(e.getMessage(), e);
         return Result.error("Redis 连接异常!");
     }
+
+    /**
+     * spring security的异常都在filter中处理了，我们捕获不到
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(AuthenticationException.class)
+    public Result<?> handleAuthenticationException(PoolException e) {
+        log.error(e.getMessage(), e);
+        return Result.error(messageSource.getMessage("001", null, Locale.forLanguageTag(LOCALE)));
+    }
+
 
 }
