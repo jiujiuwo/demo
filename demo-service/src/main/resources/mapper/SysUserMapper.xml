@@ -1,53 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.csits.demo.mapper.SysUserMapper">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.csits.demo.module.sys.mapper.SysUserMapper">
 
-    <resultMap id="BaseResultMap" type="org.csits.demo.domain.SysUser">
-        <id property="id" column="id" jdbcType="VARCHAR"/>
-        <result property="username" column="username" jdbcType="VARCHAR"/>
-        <result property="realname" column="realname" jdbcType="VARCHAR"/>
-        <result property="password" column="password" jdbcType="VARCHAR"/>
-        <result property="salt" column="salt" jdbcType="VARCHAR"/>
-        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
-        <result property="birthday" column="birthday" jdbcType="TIMESTAMP"/>
-        <result property="sex" column="sex" jdbcType="TINYINT"/>
-        <result property="email" column="email" jdbcType="VARCHAR"/>
-        <result property="phone" column="phone" jdbcType="VARCHAR"/>
-        <result property="org_code" column="org_code" jdbcType="VARCHAR"/>
-        <result property="status" column="status" jdbcType="TINYINT"/>
-        <result property="del_flag" column="del_flag" jdbcType="TINYINT"/>
-        <result property="third_id" column="third_id" jdbcType="VARCHAR"/>
-        <result property="third_type" column="third_type" jdbcType="VARCHAR"/>
-        <result property="activiti_sync" column="activiti_sync" jdbcType="TINYINT"/>
-        <result property="work_no" column="work_no" jdbcType="VARCHAR"/>
-        <result property="post" column="post" jdbcType="VARCHAR"/>
-        <result property="telephone" column="telephone" jdbcType="VARCHAR"/>
-        <result property="create_by" column="create_by" jdbcType="VARCHAR"/>
-        <result property="create_time" column="create_time" jdbcType="TIMESTAMP"/>
-        <result property="update_by" column="update_by" jdbcType="VARCHAR"/>
-        <result property="update_time" column="update_time" jdbcType="TIMESTAMP"/>
-        <result property="user_identity" column="user_identity" jdbcType="TINYINT"/>
-        <result property="depart_ids" column="depart_ids" jdbcType="VARCHAR"/>
-        <result property="rel_tenant_ids" column="rel_tenant_ids" jdbcType="VARCHAR"/>
-        <result property="client_id" column="client_id" jdbcType="VARCHAR"/>
-    </resultMap>
-
-    <sql id="Base_Column_List">
-        id
-        ,username,realname,
-        password,salt,avatar,
-        birthday,sex,email,
-        phone,org_code,status,
-        del_flag,third_id,third_type,
-        activiti_sync,work_no,post,
-        telephone,create_by,create_time,
-        update_by,update_time,user_identity,
-        depart_ids,rel_tenant_ids,client_id
-    </sql>
-
-    <select id="selectPageVo" resultType="org.csits.demo.domain.SysUser">
-        select <include refid="Base_Column_List"/> from sys_user
-    </select>
 </mapper>
