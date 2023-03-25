@@ -15,21 +15,21 @@ public class CustomSysUser extends SysUser implements UserDetails, Serializable 
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return super.getDelFlag() == 0;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return super.getDelFlag() == 1;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return super.getDelFlag() == 0;
     }
 
     @Override
     public boolean isEnabled() {
-        return super.getDelFlag() == 1;
+        return super.getDelFlag() == 0;
     }
 }

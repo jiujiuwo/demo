@@ -7,6 +7,7 @@ import org.csits.demo.api.qo.SysUserQo;
 import org.csits.demo.module.sys.entity.SysUser;
 import org.csits.demo.module.sys.mapper.SysUserMapper;
 import org.csits.demo.module.sys.service.ISysUserService;
+import org.csits.demo.util.UuidUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,14 @@ class DemoApplicationTests {
         sysUserQo.setPage(page);
         Page<SysUser> result = sysUserService.page(page);
         System.out.println(result.getRecords());
+    }
+
+    @Test
+    void testPassword() {
+        SysUser sysUser = new SysUser();
+        sysUser.setUsername("lihaifeng");
+        sysUser.setPassword("lihaifeng");
+        sysUser.setId(UuidUtils.getUUID());
+        sysUserService.save(sysUser);
     }
 }
