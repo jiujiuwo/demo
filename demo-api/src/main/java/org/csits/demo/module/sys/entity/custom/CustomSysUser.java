@@ -1,7 +1,5 @@
 package org.csits.demo.module.sys.entity.custom;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
 import org.csits.demo.module.sys.entity.SysUser;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,6 +9,9 @@ import java.io.Serializable;
 import java.util.Collection;
 
 public class CustomSysUser extends SysUser implements UserDetails, CredentialsContainer, Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
