@@ -4,9 +4,9 @@ package demo;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.csits.demo.DemoApplication;
 import org.csits.demo.api.qo.SysUserQo;
-import org.csits.demo.domain.SysUser;
-import org.csits.demo.mapper.SysUserMapper;
-import org.csits.demo.service.SysUserService;
+import org.csits.demo.module.sys.entity.SysUser;
+import org.csits.demo.module.sys.mapper.SysUserMapper;
+import org.csits.demo.module.sys.service.ISysUserService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,25 +20,26 @@ import java.util.UUID;
 class DemoApplicationTests {
 
     @Autowired
-    SysUserService sysUserService;
+    ISysUserService sysUserService;
     @Autowired
     SysUserMapper sysUserMapper;
+
     @Test
     void contextLoads() {
         SysUser sysUser = new SysUser();
-        sysUser.setId(UUID.randomUUID().toString().replace("-",""));
+        sysUser.setId(UUID.randomUUID().toString().replace("-", ""));
         sysUserService.save(sysUser);
     }
 
     @Test
     void contextLoads2() {
-       SysUser sysUser = new SysUser();
-       Page<SysUser> page = new Page<>();
+        SysUser sysUser = new SysUser();
+        Page<SysUser> page = new Page<>();
         SysUserQo sysUserQo = new SysUserQo();
         sysUser.setId("803ccd6d830140e59b1a7bed48d6abe8");
         sysUserQo.setCondition(sysUser);
         sysUserQo.setPage(page);
-        Page<SysUser> result = sysUserService.selectPageVo(sysUserQo);
+        Page<SysUser> result = sysUserService.page(page);
         System.out.println(result.getRecords());
     }
 }

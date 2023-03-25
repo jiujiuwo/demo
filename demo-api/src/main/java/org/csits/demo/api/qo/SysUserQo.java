@@ -2,10 +2,9 @@ package org.csits.demo.api.qo;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.csits.demo.domain.SysUser;
+import org.csits.demo.module.sys.entity.SysUser;
 import org.springframework.validation.annotation.Validated;
 
 import java.io.Serializable;

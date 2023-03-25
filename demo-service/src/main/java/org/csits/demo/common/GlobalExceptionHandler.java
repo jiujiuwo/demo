@@ -17,6 +17,12 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @Slf4j
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(Exception.class)
+    public Result<?> handlerException(Exception e) {
+        log.error(e.getMessage(), e);
+        return Result.error(500, e.getMessage());
+    }
+
     @ExceptionHandler(RuntimeException.class)
     public Result<?> handlerRunTimeException(Exception e) {
         log.error(e.getMessage(), e);

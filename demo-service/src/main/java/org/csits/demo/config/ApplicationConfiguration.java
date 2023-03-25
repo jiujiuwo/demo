@@ -26,9 +26,4 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 @ComponentScan
 public class ApplicationConfiguration {
 
-    @Bean
-    public RedisConnectionFactory redisConnectionFactory() {
-        return new LettuceConnectionFactory();
-    }
-
 }

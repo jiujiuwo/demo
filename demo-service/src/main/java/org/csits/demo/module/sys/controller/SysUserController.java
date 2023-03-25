@@ -1,5 +1,12 @@
 package org.csits.demo.module.sys.controller;
 
+import org.csits.demo.api.qo.LoginQo;
+import org.csits.demo.comm.Result;
+import org.csits.demo.module.sys.entity.custom.CustomSysUser;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 
@@ -12,7 +19,11 @@ import org.springframework.stereotype.Controller;
  * @since 2023-03-25
  */
 @Controller
-@RequestMapping("/sys/sysUser")
+@RequestMapping("/user")
 public class SysUserController {
 
+    @PostMapping("/login/check")
+    public Result loginCheck(@RequestBody @Validated LoginQo loginQo, @AuthenticationPrincipal CustomSysUser sysUser) {
+        return Result.OK(sysUser);
+    }
 }

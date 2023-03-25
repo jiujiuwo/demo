@@ -4,9 +4,10 @@ import org.csits.demo.module.sys.entity.SysUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-public class CustomSysUser extends SysUser implements UserDetails {
+public class CustomSysUser extends SysUser implements UserDetails, Serializable {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
