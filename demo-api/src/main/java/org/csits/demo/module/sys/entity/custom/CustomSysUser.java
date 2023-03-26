@@ -1,5 +1,6 @@
 package org.csits.demo.module.sys.entity.custom;
 
+import lombok.*;
 import org.csits.demo.module.sys.entity.SysUser;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
@@ -8,6 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.io.Serializable;
 import java.util.Collection;
 
+@Data
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 public class CustomSysUser extends SysUser implements UserDetails, CredentialsContainer, Serializable {
 
     private static final long serialVersionUID = 1L;

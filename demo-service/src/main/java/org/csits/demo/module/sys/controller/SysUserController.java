@@ -33,12 +33,6 @@ public class SysUserController {
     @Autowired
     private ISysUserService sysUserService;
 
-    @Operation(method = "POST", summary = "登陆验证")
-    @PostMapping("/login/check")
-    public Result loginCheck(@RequestBody @Validated LoginQo loginQo, @AuthenticationPrincipal CustomSysUser sysUser) {
-        return Result.OK(sysUser);
-    }
-
     @Operation(method = "POST", summary = "添加用户信息")
     @PostMapping("/add")
     public Result add(@RequestBody @Validated CustomSysUser sysUser) {
