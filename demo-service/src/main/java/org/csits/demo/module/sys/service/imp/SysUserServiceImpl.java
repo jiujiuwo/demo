@@ -7,6 +7,7 @@ import org.csits.demo.module.sys.entity.SysUser;
 import org.csits.demo.module.sys.entity.custom.CustomSysUser;
 import org.csits.demo.module.sys.mapper.SysUserMapper;
 import org.csits.demo.module.sys.service.ISysUserService;
+import org.csits.demo.utils.MessageService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -18,7 +19,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Locale;
 
-import static org.csits.demo.config.ApplicationConfiguration.LOCALE;
 
 /**
  * <p>
@@ -32,7 +32,7 @@ import static org.csits.demo.config.ApplicationConfiguration.LOCALE;
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
 
     @Autowired
-    private MessageSource messageSource;
+    private MessageService messageService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -40,7 +40,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         lambdaQueryWrapper.eq(SysUser::getUsername, username);
         SysUser sysUser = baseMapper.selectOne(lambdaQueryWrapper);
         if (ObjectUtils.isEmpty(sysUser)) {
-            throw new UsernameNotFoundException(messageSource.getMessage("001", null, new Locale(LOCALE)));
+            throw new UsernameNotFoundException(messageService.getMessage("001"));
         }
         CustomSysUser customSysUser = new CustomSysUser();
         BeanUtils.copyProperties(sysUser, customSysUser);

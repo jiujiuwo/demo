@@ -2,7 +2,7 @@ package demo;
 
 import lombok.extern.slf4j.Slf4j;
 import org.csits.demo.DemoApplication;
-import org.csits.demo.config.MyRestTemplteService;
+import org.csits.demo.config.MyRestTemplteConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class SpringDataRedisTest {
     RedisTemplate redisTemplate;
 
     @Autowired
-    MyRestTemplteService myRestTemplteService;
+    MyRestTemplteConfig myRestTemplteService;
 
     @Test
     public void testRedis() {

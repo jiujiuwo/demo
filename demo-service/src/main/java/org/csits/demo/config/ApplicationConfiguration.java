@@ -27,11 +27,4 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 @ComponentScan
 public class ApplicationConfiguration {
 
-    public static String LOCALE;
-
-    @Value("${spring.web.locale}")
-    public void setLOCALE(String locale) {
-        this.LOCALE = locale;
-    }
-
 }

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.csits.demo.comm.Result;
 import org.csits.demo.module.sys.entity.custom.CustomSysUser;
 import org.csits.demo.module.sys.service.ISysUserService;
+import org.csits.demo.utils.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -20,10 +21,6 @@ import org.springframework.security.web.access.intercept.RequestAuthorizationCon
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import java.util.Locale;
-
-import static org.csits.demo.config.ApplicationConfiguration.LOCALE;
-
 @Slf4j
 @Configuration
 @EnableWebSecurity
@@ -33,7 +30,7 @@ public class WebSecurityConfig {
     private ISysUserService userService;
 
     @Autowired
-    private MessageSource messageSource;
+    private MessageService messageService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -66,9 +63,9 @@ public class WebSecurityConfig {
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
         return (request, response, authentication) -> {
-            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
             CustomSysUser customSysUser = (CustomSysUser) authentication.getPrincipal();
-            Result result = Result.OK(customSysUser);
+            Result result = Result.OK(messageService.getMessage("000"), customSysUser);
             log.info(JSONObject.toJSONString(result));
             response.getWriter().write(JSONObject.toJSONString(result));
             response.getWriter().flush();
@@ -78,8 +75,8 @@ public class WebSecurityConfig {
     @Bean
     public AuthenticationFailureHandler authenticationFailureHandler() {
         return (request, response, exception) -> {
-            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-            Result result = Result.error(messageSource.getMessage("001", null, Locale.forLanguageTag(LOCALE)));
+            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+            Result result = Result.error(messageService.getMessage("001"));
             log.info(JSONObject.toJSONString(result));
             response.getWriter().write(JSONObject.toJSONString(result));
             response.getWriter().flush();
