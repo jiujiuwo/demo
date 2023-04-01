@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author lhf
- * @since 2023-03-25
+ * @since 2023-04-01
  */
 public interface ISysPermissionV2Service extends IService<SysPermissionV2> {
 

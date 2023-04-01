@@ -10,8 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * </p>
  *
  * @author lhf
- * @since 2023-03-25
+ * @since 2023-04-01
  */
-public interface ISysUserService extends IService<SysUser> , UserDetailsService {
+public interface ISysUserService extends IService<SysUser>, UserDetailsService {
 
 }

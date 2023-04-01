@@ -6,8 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /**
  * <p>
@@ -15,10 +14,9 @@ import lombok.Setter;
  * </p>
  *
  * @author lhf
- * @since 2023-03-25
+ * @since 2023-04-01
  */
-@Getter
-@Setter
+@Data
 @TableName("sys_position")
 @Schema(name = "SysPosition", description = "")
 public class SysPosition implements Serializable {

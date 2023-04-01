@@ -3,11 +3,15 @@ package org.csits.demo.module.sys.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.Data;
+import lombok.experimental.Accessors;
+import org.hibernate.validator.constraints.Length;
 
 /**
  * <p>
@@ -15,11 +19,11 @@ import lombok.Setter;
  * </p>
  *
  * @author lhf
- * @since 2023-03-25
+ * @since 2023-04-01
  */
-@Getter
-@Setter
+@Data
 @TableName("sys_user")
+@Accessors
 @Schema(name = "SysUser", description = "用户表")
 public class SysUser implements Serializable {
 
@@ -29,14 +33,17 @@ public class SysUser implements Serializable {
     @TableId("id")
     private String id;
 
+    @Length(min = 6, max = 20)
     @Schema(description = "登录账号")
     @TableField("username")
+    @NotEmpty
     private String username;
 
     @Schema(description = "真实姓名")
     @TableField("realname")
     private String realname;
 
+    @Length(min = 8, max = 20)
     @Schema(description = "密码")
     @TableField("password")
     private String password;
