@@ -7,7 +7,6 @@ import org.csits.demo.module.sys.entity.custom.CustomSysUser;
 import org.csits.demo.module.sys.service.ISysUserService;
 import org.csits.demo.utils.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -16,7 +15,9 @@ import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.authorization.AuthorizationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -35,16 +36,19 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests((authorize) -> authorize
-                        .anyRequest().authenticated()
+                .authorizeRequests((authorize) ->
+                        authorize.requestMatchers("/").authenticated()
                 )
                 .formLogin((form) -> form
+                        .loginPage("/")
                         .loginProcessingUrl("/user/login/check")
                         .successHandler(authenticationSuccessHandler())
                         .failureHandler(authenticationFailureHandler())
                         .permitAll()
-                )
-                .csrf().disable();
+                ).csrf().disable()
+                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint())
+                .accessDeniedHandler(accessDeniedHandler());
+
         return http.build();
     }
 
@@ -77,6 +81,28 @@ public class WebSecurityConfig {
         return (request, response, exception) -> {
             response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
             Result result = Result.error(messageService.getMessage("001"));
+            log.info(JSONObject.toJSONString(result));
+            response.getWriter().write(JSONObject.toJSONString(result));
+            response.getWriter().flush();
+        };
+    }
+
+    @Bean
+    public AuthenticationEntryPoint authenticationEntryPoint() {
+        return (request, response, authException) -> {
+            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+            Result result = Result.error(messageService.getMessage("002"));
+            log.info(JSONObject.toJSONString(result));
+            response.getWriter().write(JSONObject.toJSONString(result));
+            response.getWriter().flush();
+        };
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return (request, response, accessDeniedException) -> {
+            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+            Result result = Result.error(messageService.getMessage("003"));
             log.info(JSONObject.toJSONString(result));
             response.getWriter().write(JSONObject.toJSONString(result));
             response.getWriter().flush();

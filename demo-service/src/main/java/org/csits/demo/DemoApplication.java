@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+//@EnableCasClient
 @SpringBootApplication
 @ComponentScan(value = {"org.csits.demo.*"})
 @MapperScan("org.csits.demo.module.*.mapper")

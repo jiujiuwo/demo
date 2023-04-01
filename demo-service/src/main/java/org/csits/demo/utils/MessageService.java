@@ -25,6 +25,10 @@ public class MessageService {
         return messageSource.getMessage(code, null, Locale.forLanguageTag(LOCALE));
     }
 
+    public String getMessage(String code, Object[] args) {
+        return messageSource.getMessage(code, args, Locale.forLanguageTag(LOCALE));
+    }
+
     public String getMessage(String code, String locale) {
         return messageSource.getMessage(code, null, Locale.forLanguageTag(locale));
     }
