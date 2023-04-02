@@ -1,5 +1,8 @@
 package org.csits.demo.common;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.csits.demo.comm.Result;
 import org.csits.demo.utils.MessageService;
@@ -8,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.redis.connection.PoolException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,10 +19,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-
+@Slf4j
 @RestController
 @RestControllerAdvice
-@Slf4j
 public class GlobalExceptionHandler {
 
     @Autowired
@@ -109,4 +112,19 @@ public class GlobalExceptionHandler {
     }
 
 
+    @ExceptionHandler({ConstraintViolationException.class, BindException.class})
+    public Result validExceptionHanlder(Exception ex, HttpServletRequest request) {
+        //log.error(ex.getMessage(),ex);
+        String msg = "";
+        if (ex instanceof ConstraintViolationException) {
+            ConstraintViolationException constraintViolationException = (ConstraintViolationException) ex;
+            ConstraintViolation<?> next = constraintViolationException.getConstraintViolations().iterator().next();
+            msg = next.getMessage();
+        } else if (ex instanceof BindException) {
+            BindException bindException = (BindException) ex;
+            msg = bindException.getBindingResult().getFieldError().getDefaultMessage();
+        }
+        log.error(msg);
+        return Result.error(msg);
+    }
 }

@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
@@ -26,7 +27,6 @@ import org.springframework.validation.annotation.Validated;
 @Data
 @TableName("sys_user")
 @Schema(name = "SysUser", description = "用户表")
-@Validated
 public class SysUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,7 +39,6 @@ public class SysUser implements Serializable {
     @Length(min = 6, max = 20)
     @Schema(description = "登录账号")
     @TableField("username")
-    @NotEmpty
     private String username;
 
     @Schema(description = "真实姓名")

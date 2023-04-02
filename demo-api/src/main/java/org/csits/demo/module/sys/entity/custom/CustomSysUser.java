@@ -13,7 +13,6 @@ import java.io.Serializable;
 import java.util.Collection;
 
 @Data
-@Valid
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class CustomSysUser extends SysUser implements UserDetails, CredentialsContainer, Serializable {
