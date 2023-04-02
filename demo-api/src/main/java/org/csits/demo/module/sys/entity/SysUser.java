@@ -8,10 +8,12 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.validation.annotation.Validated;
 
 /**
  * <p>
@@ -23,8 +25,8 @@ import org.hibernate.validator.constraints.Length;
  */
 @Data
 @TableName("sys_user")
-@Accessors
 @Schema(name = "SysUser", description = "用户表")
+@Validated
 public class SysUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,6 +35,7 @@ public class SysUser implements Serializable {
     @TableId("id")
     private String id;
 
+    @NotBlank(message = "用户名不能为空")
     @Length(min = 6, max = 20)
     @Schema(description = "登录账号")
     @TableField("username")
@@ -43,7 +46,8 @@ public class SysUser implements Serializable {
     @TableField("realname")
     private String realname;
 
-    @Length(min = 8, max = 20)
+    @NotBlank(message = "密码不能为空")
+    @Length(min = 6, max = 10)
     @Schema(description = "密码")
     @TableField("password")
     private String password;
