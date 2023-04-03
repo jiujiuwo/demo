@@ -21,6 +21,8 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+
 
 @Slf4j
 @Configuration
@@ -35,18 +37,17 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests((authorize) ->
-                        authorize.requestMatchers("/").authenticated()
-                )
-                .formLogin((form) -> form
-                        .loginPage("/")
+        http.authorizeRequests(
+                (authorize) -> authorize.requestMatchers("/").authenticated())
+                .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and())
+                .formLogin((form) -> form.loginPage("/")
                         .loginProcessingUrl("/user/login/check")
                         .successHandler(authenticationSuccessHandler())
-                        .failureHandler(authenticationFailureHandler())
-                        .permitAll()
-                ).csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint())
+                        .failureHandler(authenticationFailureHandler()).permitAll())
+                .authorizeRequests((authorize) -> authorize.requestMatchers("/index.html", "/", "/home", "/login","/swagger-ui.html")
+                        .permitAll())
+                .exceptionHandling()
+                .authenticationEntryPoint(authenticationEntryPoint())
                 .accessDeniedHandler(accessDeniedHandler());
 
         return http.build();
