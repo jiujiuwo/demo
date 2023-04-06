@@ -1,9 +1,11 @@
 package org.csits.demo.module.sys.controller;
 
+import com.alibaba.fastjson2.schema.ValidateResult;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.csits.demo.comm.Result;
 import org.csits.demo.module.sys.entity.SysUser;
@@ -13,6 +15,7 @@ import org.csits.demo.utils.MessageService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
  * @author lhf
  * @since 2023-04-01
  */
+@Slf4j
 @RestController
 @RequestMapping("/user")
 public class SysUserController {

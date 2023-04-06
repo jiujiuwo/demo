@@ -22,6 +22,11 @@ import org.springframework.security.web.access.intercept.RequestAuthorizationCon
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfTokenRequestHandler;
+import org.springframework.security.web.csrf.XorCsrfTokenRequestAttributeHandler;
+
+import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 
 
 @Slf4j
@@ -38,14 +43,15 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests(
-                (authorize) -> authorize.requestMatchers("/").authenticated())
-                .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and())
-                .formLogin((form) -> form.loginPage("/")
+                        (authorize) -> authorize.requestMatchers("/").authenticated())
+                .authorizeRequests((authorize) -> authorize.requestMatchers("/rest/").permitAll())
+                .csrf(csrf -> csrf.csrfTokenRepository(cookieCsrfTokenRepository())
+                        .csrfTokenRequestHandler(csrfTokenRequestHandler())
+                        .and())
+                .formLogin((form) -> form
                         .loginProcessingUrl("/user/login/check")
                         .successHandler(authenticationSuccessHandler())
                         .failureHandler(authenticationFailureHandler()).permitAll())
-                .authorizeRequests((authorize) -> authorize.requestMatchers("/index.html", "/", "/home", "/login","/swagger-ui.html")
-                        .permitAll())
                 .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint())
                 .accessDeniedHandler(accessDeniedHandler());
@@ -108,5 +114,19 @@ public class WebSecurityConfig {
             response.getWriter().write(JSONObject.toJSONString(result));
             response.getWriter().flush();
         };
+    }
+
+    @Bean
+    public CookieCsrfTokenRepository cookieCsrfTokenRepository() {
+        return CookieCsrfTokenRepository.withHttpOnlyFalse();
+    }
+
+    @Bean
+    public CsrfTokenRequestHandler csrfTokenRequestHandler() {
+        XorCsrfTokenRequestAttributeHandler handler = new XorCsrfTokenRequestAttributeHandler();
+        handler.setSecureRandom(new SecureRandom("sfdsafdad".getBytes(StandardCharsets.UTF_8)));
+        handler.setCsrfRequestAttributeName("_csrf");
+        CsrfTokenRequestHandler requestHandler = handler::handle;
+        return requestHandler;
     }
 }
