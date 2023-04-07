@@ -124,8 +124,6 @@ public class WebSecurityConfig {
     @Bean
     public CsrfTokenRequestHandler csrfTokenRequestHandler() {
         XorCsrfTokenRequestAttributeHandler handler = new XorCsrfTokenRequestAttributeHandler();
-        handler.setSecureRandom(new SecureRandom("sfdsafdad".getBytes(StandardCharsets.UTF_8)));
-        handler.setCsrfRequestAttributeName("_csrf");
         CsrfTokenRequestHandler requestHandler = handler::handle;
         return requestHandler;
     }
